@@ -1,0 +1,25 @@
+<%= form_with(model: article) do |form| %>
+  <div>
+    <%= form.label :title %><br>
+    <%= form.text_area :title %>
+  </div>
+#このコードは、記事のタイトルを入力するためのフォームです
+#form_withはform_withはRailsでフォームを作成するためのヘルパーメソッド
+
+  <div>
+    <%= form.label :content %><br>
+    <%= form.text_area :content %>
+  </div>
+#このコードは、記事の内容を入力するためのフォームです
+  <div>
+    <%= form.collection_radio_buttons(:genre, ['ニュース', 'コラム', 'レビュー','時事ネタ'], :to_s, :to_s) do |b| %>
+      <%= b.label { b.radio_button + b.text } %>
+    <% end %>
+  </div>
+#このコードは、記事のジャンルを選択し入力するためのフォームです
+  <div>
+    <%= form.submit %>
+  </div>
+#このコードは、入力したものを送ります
+  <div>
+<% end %>
