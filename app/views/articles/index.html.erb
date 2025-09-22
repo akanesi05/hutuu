@@ -1,12 +1,25 @@
 
-<h1>ブログ記事一覧</h1>
-<%= link_to '記事を作成する', new_article_path %>
 
-<% @articles.each do |article| %>
-  <div>
-    <h2>'タイトル:'<%= link_to article.title, article %></h2>
-    <p>'内容:'<%= article.content %></p>
-     <p>ジャンル:<%= article.genre %></p>
-  </div>
+
+
+<%= link_to "すべて", articles_path %>
+
+<% @genres.each do |g| %>
+  <%= link_to "#{g} (#{Article.where(genre: g).count})", articles_path(genre: g) %>
 <% end %>
+
+<% if params[:genre].present? %>
+
+  <h1><%= params[:genre] %> の記事一覧</h1>
+<% else %>
+  <h1>ブログ記事一覧</h1>
+  <%= link_to '記事を作成する', new_article_path %>
+<% end %>
+<%= link_to '記事を作成する', new_article_path %>
+<% @articles.each do |article| %>
+  <h2>タイトル:<%= link_to article.title, article %></h2>
+  <p>内容:<%= article.content %></p>
+  <p>ジャンル: <%= link_to article.genre, articles_path(genre: article.genre) %></p>
+<% end %>
+
 

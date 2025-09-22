@@ -1,8 +1,14 @@
 
 class ArticlesController < ApplicationController
   def index
+  if params[:genre].present?
+    @articles = Article.where(genre: params[:genre])
+  else
     @articles = Article.all
   end
+  @genres = Article.distinct.pluck(:genre)
+  end
+
 
   def show
     @article = Article.find(params[:id])
